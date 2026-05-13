@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유영선 · HR Portfolio · ㈜대학내일</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#F05A28;
+  --brand2:#C74A1E;
+  --dark:#1D1208;
+  --mid:#2A1A0C;
+  --gray:#64748B;
+  --light:#94A3B8;
+  --bg:#F7F5F3;
+  --bg2:#EEE9E4;
+  --white:#FFFFFF;
+  --radius:14px;
+  --ff:"Noto Sans KR",sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff);background:var(--bg);color:var(--dark);line-height:1.6}
+button{cursor:pointer;font-family:var(--ff)}
+
+/* ── NAV ── */
+#nav{
+  position:sticky;top:0;z-index:999;background:#1D1208;
+  display:flex;align-items:center;padding:0 32px;height:60px;
+  border-bottom:1px solid rgba(240,90,40,.2);
+  gap:6px;
+}
+.nav-brand{color:var(--brand);font-weight:700;font-size:15px;margin-right:auto;letter-spacing:-.3px}
+.nav-tab{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(240,90,40,.15);
+  border-radius:8px;
+  color:rgba(255,255,255,.55);
+  font-size:13px;font-weight:600;
+  padding:0 20px;height:36px;
+  transition:.2s;
+  letter-spacing:.2px;
+}
+.nav-tab:hover{background:rgba(240,90,40,.15);color:var(--white);border-color:rgba(240,90,40,.4)}
+.nav-tab.active{
+  background:var(--brand);
+  color:var(--white);
+  border-color:var(--brand);
+  box-shadow:0 2px 10px rgba(240,90,40,.35);
+}
+
+/* ── HERO ── */
+#hero{background:linear-gradient(160deg, #1D1208 60%, #2E1A0A);padding:60px 40px 52px;overflow:hidden;position:relative}
+.hero-orb{
+  position:absolute;top:-100px;right:-80px;
+  width:450px;height:450px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,90,40,.18),transparent 60%);
+  pointer-events:none;
+}
+.hero-eyebrow{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:4px;color:var(--brand);text-transform:uppercase;margin-bottom:18px}
+.hero-name{font-size:72px;font-weight:900;color:var(--white);line-height:.95;letter-spacing:-3px;margin-bottom:16px}
+.hero-name span{color:var(--brand)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:6px}
+.hero-desc{font-size:13px;color:var(--brand);margin-bottom:36px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px}
+.hero-tag{font-size:11px;background:rgba(240,90,40,.12);color:var(--brand);padding:5px 14px;border-radius:20px;border:1px solid rgba(240,90,40,.3)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.hero-stat{background:rgba(255,255,255,.04);padding:22px 18px;border-right:1px solid rgba(255,255,255,.05)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{font-size:28px;font-weight:900;color:var(--brand);display:block;line-height:1}
+.hero-stat-num.small{font-size:18px;line-height:1.2;margin-top:2px}
+.hero-stat-label{font-size:10px;color:rgba(255,255,255,.35);margin-top:5px;font-family:"Space Mono",monospace;letter-spacing:.5px}
+
+/* ── SECTIONS ── */
+.section{display:none;padding:44px 40px}
+.section.active{display:block}
+.sec-title{
+  font-size:11px;letter-spacing:3px;color:var(--brand);text-transform:uppercase;
+  margin-bottom:28px;font-family:"Space Mono",monospace;
+  padding-bottom:10px;border-bottom:1px solid rgba(240,90,40,.2);
+}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--brand),rgba(240,90,40,.1))}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-dot{position:absolute;left:-22px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--brand);border:2px solid var(--bg)}
+.tl-dot.current{box-shadow:0 0 0 3px rgba(240,90,40,.25)}
+.tl-card{background:var(--white);border-radius:12px;padding:16px 18px;box-shadow:0 1px 8px rgba(0,0,0,.06);border-left:3px solid var(--brand)}
+.tl-card.old{border-left-color:#D0C8C0}
+.tl-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}
+.tl-company{font-size:14px;font-weight:700;color:var(--dark)}
+.tl-period{font-size:10px;color:var(--brand);background:rgba(240,90,40,.1);padding:2px 9px;border-radius:8px;white-space:nowrap}
+.tl-role{font-size:12px;color:var(--brand);margin-bottom:5px}
+.tl-desc{font-size:12px;color:var(--gray)}
+
+/* ── SKILL BARS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:16px}
+.skill-group-title{font-size:12px;font-weight:700;color:var(--brand);margin-bottom:14px}
+.skill-bar-row{margin-bottom:12px}
+.skill-bar-meta{display:flex;justify-content:space-between;margin-bottom:5px;font-size:12px}
+.skill-bar-track{height:5px;background:var(--bg2);border-radius:10px;overflow:hidden}
+.skill-bar-fill{height:100%;border-radius:10px;width:0;transition:width 1.3s cubic-bezier(.34,1.56,.64,1)}
+
+/* ── PROJECT CARDS (CLICKABLE) ── */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.proj-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.06);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.proj-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.proj-card.highlight{border:1.5px solid var(--brand)}
+.proj-card.open .proj-detail{display:block}
+.proj-card.open .proj-toggle-icon{transform:rotate(180deg)}
+.proj-header{padding:20px 20px 14px;border-bottom:1px solid rgba(0,0,0,.05)}
+.proj-header-top{display:flex;justify-content:space-between;align-items:flex-start}
+.proj-num{font-family:"Space Mono",monospace;font-size:32px;font-weight:700;color:var(--light);opacity:.3;line-height:1}
+.proj-toggle-icon{font-size:18px;color:var(--brand);transition:transform .25s;margin-top:4px}
+.proj-co-badge{font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.proj-hl-badge{font-size:9px;background:var(--brand);color:var(--white);padding:3px 9px;border-radius:12px;font-weight:700}
+.proj-period{font-size:11px;color:var(--light);margin-bottom:6px}
+.proj-title{font-size:14px;font-weight:700;color:var(--dark);line-height:1.4}
+.proj-body{padding:14px 20px 16px}
+.proj-required{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.proj-req-badge{font-size:10px;padding:3px 10px;border-radius:16px;font-weight:700}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px}
+.proj-tag-chip{font-size:11px;background:var(--bg);color:var(--brand2);padding:4px 10px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.15)}
+
+/* ── PROJECT DETAIL (hidden by default) ── */
+.proj-detail{
+  display:none;
+  padding:20px 20px 20px;
+  border-top:1px solid rgba(240,90,40,.12);
+  background:var(--bg);
+  animation:slideDown .2s ease;
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.detail-section-title{font-size:10px;letter-spacing:2px;color:var(--brand);text-transform:uppercase;font-family:"Space Mono",monospace;margin-bottom:10px;font-weight:700}
+.detail-task{font-size:12px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(0,0,0,.05);padding-left:12px;position:relative;line-height:1.5}
+.detail-task::before{content:'›';position:absolute;left:0;color:var(--brand);font-weight:700}
+.detail-outcome{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.detail-outcome:last-child{border-bottom:none}
+.detail-outcome-num{font-family:"Space Mono",monospace;font-size:16px;font-weight:700;color:var(--brand);min-width:70px;line-height:1.2}
+.detail-outcome-label{font-size:12px;color:var(--gray);line-height:1.5;padding-top:1px}
+.detail-two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px}
+
+/* ── CHAT ── */
+.chat-wrap{background:var(--white);border-radius:var(--radius);box-shadow:0 4px 24px rgba(240,90,40,.1);border:1px solid rgba(240,90,40,.15);overflow:hidden}
+.chat-header{background:#1D1208;padding:18px 22px;display:flex;align-items:center;gap:12px}
+.chat-dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
+.chat-title{color:var(--white);font-size:14px;font-weight:700}
+.chat-sub{color:rgba(255,255,255,.35);font-size:11px;margin-left:auto}
+.chat-messages{height:380px;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:14px}
+.chat-messages::-webkit-scrollbar{width:4px}
+.chat-messages::-webkit-scrollbar-thumb{background:rgba(240,90,40,.2);border-radius:2px}
+.msg-row{display:flex}
+.msg-row.user{justify-content:flex-end}
+.msg-bubble{max-width:76%;padding:11px 15px;border-radius:16px;font-size:13px;line-height:1.6;white-space:pre-wrap}
+.msg-row.assistant .msg-bubble{background:var(--bg);color:var(--dark);border-bottom-left-radius:4px}
+.msg-row.user .msg-bubble{background:var(--brand);color:var(--white);border-bottom-right-radius:4px}
+.chat-suggested{padding:12px 20px;border-top:1px solid rgba(240,90,40,.08);display:flex;gap:8px;flex-wrap:wrap}
+.sugg-btn{font-size:11px;background:var(--bg);color:var(--brand2);border:1px solid rgba(240,90,40,.25);padding:5px 13px;border-radius:20px;transition:.15s}
+.sugg-btn:hover{background:rgba(240,90,40,.08)}
+.chat-input-row{padding:12px 16px;border-top:1px solid rgba(240,90,40,.1);display:flex;gap:8px}
+#chat-input{flex:1;border:1px solid rgba(240,90,40,.25);border-radius:24px;padding:9px 17px;font-size:13px;font-family:var(--ff);outline:none;transition:.2s;background:var(--white)}
+#chat-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(240,90,40,.1)}
+#send-btn{background:var(--brand);color:var(--white);border:none;border-radius:24px;padding:9px 22px;font-size:13px;font-weight:700;transition:.15s}
+#send-btn:hover{background:var(--brand2)}
+#send-btn:disabled{opacity:.5;cursor:not-allowed}
+.typing-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand);margin:0 2px;animation:typing .9s ease-in-out infinite}
+.typing-dot:nth-child(2){animation-delay:.15s}
+.typing-dot:nth-child(3){animation-delay:.3s}
+@keyframes typing{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+/* ── FOOTER ── */
+#footer{background:linear-gradient(90deg,#1D1208,#251509);padding:28px 40px;display:flex;justify-content:space-between;align-items:center}
+.footer-name{color:var(--white);font-weight:700;font-size:16px}
+.footer-info{color:rgba(255,255,255,.35);font-size:11px;margin-top:3px}
+.footer-right{text-align:right}
+.footer-target{color:var(--brand);font-size:12px;font-weight:700}
+.footer-role{color:rgba(255,255,255,.35);font-size:11px;margin-top:3px}
+
+/* ── UTILS ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.card{background:var(--white);border-radius:var(--radius);padding:24px 26px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.hint{font-size:11px;color:var(--light);text-align:center;padding:8px 0 4px;letter-spacing:.5px}
+
+@media(max-width:720px){
+  .hero-stats,.proj-grid,.two-col{grid-template-columns:1fr 1fr}
+  .hero-name{font-size:52px}
+  #nav{padding:0 20px}
+  .section,#hero{padding-left:20px;padding-right:20px}
+  #footer{padding:20px;flex-direction:column;gap:10px;text-align:center}
+  .footer-right{text-align:center}
+}
+@media(max-width:480px){
+  .hero-stats,.proj-grid{grid-template-columns:1fr}
+  .two-col,.detail-two-col{grid-template-columns:1fr}
+  .nav-tab{padding:0 12px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <span class="nav-brand">유영선 · HR Portfolio</span>
+  <button class="nav-tab active" onclick="showSection('overview')">개요</button>
+  <button class="nav-tab" onclick="showSection('projects')">프로젝트</button>
+  <button class="nav-tab" onclick="showSection('chat')">AI와 대화</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-eyebrow">HR Portfolio · ㈜대학내일 · 2026</div>
+  <h1 class="hero-name" style="color:var(--white)">유영선</h1>
+  <p class="hero-sub">STAFF(HRM) 인사팀 경력 지원</p>
+  <p class="hero-desc">세대를 읽어 시대를 리드하는 대학내일의 HR 파트너가 되겠습니다</p>
+  <div class="hero-tags">
+    <span class="hero-tag">#채용운영</span>
+    <span class="hero-tag">#HR제도기획</span>
+    <span class="hero-tag">#Payroll</span>
+    <span class="hero-tag">#노무관리</span>
+    <span class="hero-tag">#AI활용</span>
+    <span class="hero-tag">#조직문화</span>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num" style="white-space:nowrap;font-size:28px">4년+</span>
+      <div class="hero-stat-label">HR 단독 경력</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num small">40%→10%</span>
+      <div class="hero-stat-label">면접 불참율 개선</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" style="white-space:nowrap;font-size:28px">95%</span>
+      <div class="hero-stat-label">행사 참여율</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" style="white-space:nowrap;font-size:28px">30%↑</span>
+      <div class="hero-stat-label">채용 지원율 증가</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OVERVIEW ═══ -->
+<section id="sec-overview" class="section active">
+  <p class="sec-title">Career Overview</p>
+  <div class="two-col">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:16px">경력 타임라인</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot current"></div>
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span class="tl-company">㈜큐엠아이티 (QMIT)</span>
+              <span class="tl-period">2026.01~현재</span>
+            </div>
+            <div class="tl-role">인사총무 단독 수행</div>
+            <div class="tl-desc">AI 스타트업(Series A 77억) · 전사 AX 프로젝트 주도 · 인사제도 개편 · 채용 운영</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card old">
+            <div class="tl-meta">
+              <span class="tl-company">㈜에이비인터내셔날</span>
+              <span class="tl-period">2025.07~12</span>
+            </div>
+            <div class="tl-role" style="color:var(--gray)">인사총무 단독 수행 (5개월)</div>
+            <div class="tl-desc">주방용품 B2B/B2C · Payroll 체계 구축 · 모성보호 표준화 · 평가보상 정립</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card old">
+            <div class="tl-meta">
+              <span class="tl-company">㈜더플릭</span>
+              <span class="tl-period">2022.05~2024.07</span>
+            </div>
+            <div class="tl-role" style="color:var(--gray)">인사총무 단독 수행 (2년 3개월)</div>
+            <div class="tl-desc">브랜딩 에이전시 · 채용 전략 전면 구축 · HR 시스템 도입 · 조직문화 설계</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card old">
+            <div class="tl-meta">
+              <span class="tl-company">㈜한달어스</span>
+              <span class="tl-period">2021.09~2022.02</span>
+            </div>
+            <div class="tl-role" style="color:var(--gray)">인사총무 계약직 (6개월)</div>
+            <div class="tl-desc">자기계발 플랫폼 · 아웃바운드 채용 · 정부지원사업 활용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:16px">핵심 역량</div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="skill-group-title">HR 운영 & 제도 기획</div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-meta"><span>채용 운영 &amp; 지원자 경험</span><span style="color:var(--brand)">95%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--brand)" data-width="95"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-meta"><span>HR Lifecycle &amp; 인사행정</span><span style="color:var(--brand)">92%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--brand)" data-width="92"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-meta"><span>조직문화 &amp; 온보딩</span><span style="color:#E8A020">90%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:#E8A020" data-width="90"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-meta"><span>Payroll &amp; 노무관리</span><span style="color:var(--brand2)">88%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--brand2)" data-width="88"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-meta"><span>평가·보상 체계 설계</span><span style="color:var(--brand2)">85%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--brand2)" data-width="85"></div></div>
+        </div>
+        <div class="skill-bar-row" style="margin-bottom:0">
+          <div class="skill-bar-meta"><span>AI 도구 &amp; HR 시스템</span><span style="color:#4CAF80">84%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:#4CAF80" data-width="84"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="skill-group-title">툴 & 도구</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">Claude AI</span>
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">Notion</span>
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">Slack</span>
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">Google Workspace</span>
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">더존 ERP</span>
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">MS Office</span>
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">Figma</span>
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">그리팅(GreetingHR)</span>
+          <span style="font-size:11px;background:rgba(240,90,40,.1);color:var(--brand2);padding:4px 11px;border-radius:8px;font-weight:600;border:1px solid rgba(240,90,40,.2)">나인하이어(NineHire)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div style="margin-top:40px">
+    <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:16px">어떤 사람인가요</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+      <div class="card" style="border-top:3px solid var(--brand)">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--brand);font-weight:700;margin-bottom:12px;text-transform:uppercase">Who I am</div>
+        <p style="font-size:13px;color:var(--gray);line-height:1.8">
+          처음부터 만드는 것을 두려워하지 않습니다. 스타트업에서 HR 시스템이 전무한 상태에서 채용·급여·평가·노무를 혼자 설계해온 경험이 그 증거입니다.
+          <br><br>
+          구성원 한 명 한 명의 상황을 진심으로 살핍니다. 모성보호 오류율 0%나 행사 참여율 95%는 수치이기 전에, 그 사람의 일상을 챙기겠다는 태도에서 나온 결과라고 생각합니다.
+          <br><br>
+          20대의 커리어와 삶을 더 알차게 만들고 싶다는 바람이 늘 있었고, 그 접점에서 HR을 하고 싶다는 생각이 대학내일 지원으로 이어졌습니다.
+        </p>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--brand)">
+        <div style="font-size:10px;letter-spacing:2px;color:var(--brand);font-weight:700;margin-bottom:12px;text-transform:uppercase">HR 철학</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <span style="font-size:18px;min-width:28px">🎯</span>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--dark);margin-bottom:3px">뾰족한 HR</div>
+              <div style="font-size:12px;color:var(--gray);line-height:1.5">제도를 만들 때 "누구를 위한 것인가"를 먼저 묻습니다. 좋아 보이는 제도보다 실제로 쓰이는 제도를 만드는 것이 목표입니다.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <span style="font-size:18px;min-width:28px">🤝</span>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--dark);margin-bottom:3px">따뜻한 HR</div>
+              <div style="font-size:12px;color:var(--gray);line-height:1.5">HR의 작은 정성이 구성원에게 닿고, 그것이 조직 전체의 에너지가 된다고 믿습니다. 커피 한 잔이 팀 분위기를 바꾸기도 합니다.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <span style="font-size:18px;min-width:28px">📊</span>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--dark);margin-bottom:3px">데이터 기반 HR</div>
+              <div style="font-size:12px;color:var(--gray);line-height:1.5">감이 아닌 데이터로 현황을 진단하고, 변화를 측정합니다. 불참율·참여율·오류율 같은 수치가 그 노력의 흔적입니다.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="sec-projects" class="section">
+  <p class="sec-title">Projects</p>
+  <p class="hint">카드를 클릭하면 상세 내용을 확인하실 수 있습니다 ↓</p>
+
+  <div class="proj-grid" style="margin-top:12px">
+
+    <!-- PROJECT 01 -->
+    <div class="proj-card" onclick="toggleProject(this)">
+      <div class="proj-header" style="background:rgba(240,90,40,.05)">
+        <div class="proj-header-top">
+          <div class="proj-num">01</div>
+          <span class="proj-toggle-icon">▾</span>
+        </div>
+        <div class="proj-co-badge" style="color:var(--brand)">㈜더플릭</div>
+        <div class="proj-period">수행기간: 2022.05 – 2024.07 (2년 3개월)</div>
+        <div class="proj-title">채용 전략 전면 구축 & 지원자 경험 고도화</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-required">
+          <span class="proj-req-badge" style="background:rgba(240,90,40,.12);color:var(--brand)">기여도: 100% 단독</span>
+          <span class="proj-req-badge" style="background:rgba(100,116,139,.1);color:var(--gray)">역할: 채용 전략가</span>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag-chip">지원율 30%↑</span>
+          <span class="proj-tag-chip">불참율 40→10%</span>
+          <span class="proj-tag-chip">구조화 면접</span>
+          <span class="proj-tag-chip">채널 다각화</span>
+        </div>
+      </div>
+      <div class="proj-detail">
+        <div class="detail-two-col">
+          <div>
+            <div class="detail-section-title">수행 업무</div>
+            <div class="detail-task">직무별 JD·급여조견표·성과급 기준·면접 질문·평가표 전면 구조화 — 채용 체계 전무한 상태에서 처음부터 설계</div>
+            <div class="detail-task">채널별 지원자 커뮤니케이션 매뉴얼·스크립트 제작으로 전형 이탈 방지</div>
+            <div class="detail-task">내부 추천·산학협력·인재 Pool 신설 및 SNS·링크드인 아웃바운드 채용 다층화</div>
+          </div>
+          <div>
+            <div class="detail-section-title">주요 성과</div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">30%↑</span>
+              <span class="detail-outcome-label">직무 기반 채용 전략 수립으로 지원율 증가</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">40→10%</span>
+              <span class="detail-outcome-label">커뮤니케이션 매뉴얼 적용으로 면접 불참율 감소</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">신뢰도↑</span>
+              <span class="detail-outcome-label">구조화 면접 도입으로 선발 평가 신뢰도 향상</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 02 -->
+    <div class="proj-card" onclick="toggleProject(this)">
+      <div class="proj-header" style="background:rgba(240,90,40,.03)">
+        <div class="proj-header-top">
+          <div class="proj-num">02</div>
+          <span class="proj-toggle-icon">▾</span>
+        </div>
+        <div class="proj-co-badge" style="color:var(--brand2)">㈜에이비인터내셔날</div>
+        <div class="proj-period">수행기간: 2025.07 – 2025.12 (5개월)</div>
+        <div class="proj-title">Payroll 운영 체계 구축 & 모성보호 제도 표준화</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-required">
+          <span class="proj-req-badge" style="background:rgba(240,90,40,.12);color:var(--brand)">기여도: 100% 단독</span>
+          <span class="proj-req-badge" style="background:rgba(100,116,139,.1);color:var(--gray)">역할: 인사운영·노무</span>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag-chip">오류율 0%</span>
+          <span class="proj-tag-chip">지원금 100%</span>
+          <span class="proj-tag-chip">Payroll 기준화</span>
+          <span class="proj-tag-chip">노무 표준화</span>
+        </div>
+      </div>
+      <div class="proj-detail">
+        <div class="detail-two-col">
+          <div>
+            <div class="detail-section-title">수행 업무</div>
+            <div class="detail-task">정규직·계약직·아르바이트·프리랜서·모성보호 대상자 급여 산정 기준화 및 월별 Payroll 정규화</div>
+            <div class="detail-task">임신·육아기 근로시간 단축, 육아휴직, 유·사산휴가 운영 표준화 및 정부지원금 주기 관리</div>
+            <div class="detail-task">직무·직급별 평가 문항 재정비 및 등급별 보상 기준 수립 → 인사 예측 가능성 향상</div>
+          </div>
+          <div>
+            <div class="detail-section-title">주요 성과</div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">0%</span>
+              <span class="detail-outcome-label">급여 오류율 달성 (복잡 항목 기준화)</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">0%</span>
+              <span class="detail-outcome-label">모성보호 근태 오류율</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">100%</span>
+              <span class="detail-outcome-label">정부지원금 수령률</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 03 -->
+    <div class="proj-card" onclick="toggleProject(this)">
+      <div class="proj-header" style="background:rgba(240,90,40,.05)">
+        <div class="proj-header-top">
+          <div class="proj-num">03</div>
+          <span class="proj-toggle-icon">▾</span>
+        </div>
+        <div class="proj-co-badge" style="color:var(--gray)">㈜한달어스</div>
+        <div class="proj-period">수행기간: 2021.09 – 2022.02 (6개월)</div>
+        <div class="proj-title">아웃바운드 채용 & 정부지원사업 활용</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-required">
+          <span class="proj-req-badge" style="background:rgba(240,90,40,.12);color:var(--brand)">기여도: 100% 단독</span>
+          <span class="proj-req-badge" style="background:rgba(100,116,139,.1);color:var(--gray)">역할: 채용 담당</span>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag-chip">지원자 2배↑</span>
+          <span class="proj-tag-chip">전환율 +40%</span>
+          <span class="proj-tag-chip">정부지원</span>
+          <span class="proj-tag-chip">시스템 구축</span>
+        </div>
+      </div>
+      <div class="proj-detail">
+        <div class="detail-two-col">
+          <div>
+            <div class="detail-section-title">수행 업무</div>
+            <div class="detail-task">SNS·링크드인 활용 아웃바운드 채용 전개 및 JD 정비·브랜드 메시지 반영 공고 설계</div>
+            <div class="detail-task">일자리도약장려금·서울시 청년일자리 등 정부지원사업 기획·신청·관리 전담</div>
+            <div class="detail-task">Notion·Google Sheet 기반 후보자 전형 이력 관리 프로세스 구축</div>
+          </div>
+          <div>
+            <div class="detail-section-title">주요 성과</div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">2배↑</span>
+              <span class="detail-outcome-label">아웃바운드 채용으로 지원자 수 증가</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">+40%</span>
+              <span class="detail-outcome-label">채용 전환율 향상</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">1천만+</span>
+              <span class="detail-outcome-label">채용 보조금 확보</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 04 -->
+    <div class="proj-card" onclick="toggleProject(this)">
+      <div class="proj-header" style="background:rgba(240,90,40,.05)">
+        <div class="proj-header-top">
+          <div class="proj-num">04</div>
+          <span class="proj-toggle-icon">▾</span>
+        </div>
+        <div class="proj-co-badge" style="color:var(--brand)">㈜큐엠아이티</div>
+        <div class="proj-period">수행기간: 2026.01 – 현재 (진행중)</div>
+        <div class="proj-title">Claude 기반 AI 활용 체계 도입 지원</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-required">
+          <span class="proj-req-badge" style="background:rgba(240,90,40,.12);color:var(--brand)">기여도: 100% 단독</span>
+          <span class="proj-req-badge" style="background:rgba(100,116,139,.1);color:var(--gray)">역할: AI 활용 기획·설계·교육</span>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag-chip">팀별 AI 가이드 설계</span>
+          <span class="proj-tag-chip">루틴 자동화</span>
+          <span class="proj-tag-chip">사내 교육 운영</span>
+          <span class="proj-tag-chip">프로세스 표준화</span>
+        </div>
+      </div>
+      <div class="proj-detail">
+        <div class="detail-two-col">
+          <div>
+            <div class="detail-section-title">수행 업무</div>
+            <div class="detail-task">각 팀의 업무 특성을 파악해 팀별 Claude 활용 가이드·프롬프트 템플릿 설계</div>
+            <div class="detail-task">전사 대상 AI 도구 활용 사내 교육 운영 및 배포 → 구성원 AI 활용 진입 장벽 낮춤</div>
+            <div class="detail-task">팀별 피드백 수렴 후 가이드 지속 업데이트 중 (진행중)</div>
+          </div>
+          <div>
+            <div class="detail-section-title">주요 성과</div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">자동화</span>
+              <span class="detail-outcome-label">루틴 업무 처리 시간 단축 및 추진속도 향상</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">활용률↑</span>
+              <span class="detail-outcome-label">팀별 맞춤 가이드로 구성원 AI 활용 진입장벽 낮춤</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">개선중</span>
+              <span class="detail-outcome-label">현장 피드백 반영하며 지속 업데이트 중</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.proj-grid (1st) -->
+
+  <!-- HR 시스템 & 조직문화 프로젝트 -->
+  <div class="proj-grid" style="margin-top:16px">
+
+    <!-- PROJECT 05 -->
+    <div class="proj-card" onclick="toggleProject(this)">
+      <div class="proj-header" style="background:rgba(240,90,40,.04)">
+        <div class="proj-header-top">
+          <div class="proj-num">05</div>
+          <span class="proj-toggle-icon">▾</span>
+        </div>
+        <div class="proj-co-badge" style="color:var(--brand)">㈜더플릭</div>
+        <div class="proj-period">수행기간: 2022.05 – 2024.07 (2년 3개월)</div>
+        <div class="proj-title">Notion·Slack 기반 HR 운영 시스템 구축</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-required">
+          <span class="proj-req-badge" style="background:rgba(240,90,40,.12);color:var(--brand)">기여도: 100% 기획·구축</span>
+          <span class="proj-req-badge" style="background:rgba(100,116,139,.1);color:var(--gray)">역할: HR 시스템 설계</span>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag-chip">인사 대시보드</span>
+          <span class="proj-tag-chip">근태 자동화</span>
+          <span class="proj-tag-chip">운영 공백 0</span>
+        </div>
+      </div>
+      <div class="proj-detail">
+        <div class="detail-two-col">
+          <div>
+            <div class="detail-section-title">구축 내용</div>
+            <div class="detail-task">Google Sheets 기반 인사관리 대시보드 — 구성원 정보·입퇴사·연차·조직도 실시간 관리</div>
+            <div class="detail-task">Notion 출퇴근·원격근무 통합 관리 시스템 — 유연근무제에 맞춘 기록 방식 설계</div>
+            <div class="detail-task">Slack 기반 부서별 업무 프로젝트 관리 템플릿 설계 및 사내 업무 규정화</div>
+          </div>
+          <div>
+            <div class="detail-section-title">효과</div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">0 공백</span>
+              <span class="detail-outcome-label">인사 운영 공백 완전 제거</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">투명↑</span>
+              <span class="detail-outcome-label">부서 간 협업 속도 및 투명성 향상</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 06 -->
+    <div class="proj-card" onclick="toggleProject(this)">
+      <div class="proj-header" style="background:rgba(240,90,40,.04)">
+        <div class="proj-header-top">
+          <div class="proj-num">06</div>
+          <span class="proj-toggle-icon">▾</span>
+        </div>
+        <div class="proj-co-badge" style="color:var(--brand)">㈜더플릭</div>
+        <div class="proj-period">수행기간: 2022.05 – 2024.07 (2년 3개월)</div>
+        <div class="proj-title">핵심가치 기반 조직문화 & 온보딩 프로그램 설계</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-required">
+          <span class="proj-req-badge" style="background:rgba(240,90,40,.12);color:var(--brand)">기여도: 100% 기획·운영</span>
+          <span class="proj-req-badge" style="background:rgba(100,116,139,.1);color:var(--gray)">역할: 조직문화 기획</span>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag-chip">참여율 95%</span>
+          <span class="proj-tag-chip">만족도 4.8/5</span>
+          <span class="proj-tag-chip">복지 4.7/5</span>
+        </div>
+      </div>
+      <div class="proj-detail">
+        <div class="detail-two-col">
+          <div>
+            <div class="detail-section-title">수행 업무</div>
+            <div class="detail-task">CEO·리더십 인터뷰 기반 핵심가치 도출 → 직무별 성장 프레임워크·온보딩 로드맵 설계</div>
+            <div class="detail-task">전사 워크숍·로고 공모전·커리어 PT 경연 등 구성원 참여형 사내 행사 기획·운영</div>
+            <div class="detail-task">복리후생 재설계 — 웰컴키트·분기 인센티브·야근 교통비 지원 제도 설계</div>
+          </div>
+          <div>
+            <div class="detail-section-title">주요 성과</div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">95%</span>
+              <span class="detail-outcome-label">사내 행사 참여율 / 만족도 4.8/5</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">4.7/5</span>
+              <span class="detail-outcome-label">복지 만족도 / 활용률 85%+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 07 -->
+    <div class="proj-card" onclick="toggleProject(this)">
+      <div class="proj-header" style="background:rgba(240,90,40,.05)">
+        <div class="proj-header-top">
+          <div class="proj-num">07</div>
+          <span class="proj-toggle-icon">▾</span>
+        </div>
+        <div class="proj-co-badge" style="color:var(--brand)">㈜큐엠아이티</div>
+        <div class="proj-period">수행기간: 2026.01 – 현재 (진행중)</div>
+        <div class="proj-title">리빌딩기 조직문화 설계 — 사내 카페 & 구성원 경험 이벤트</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-required">
+          <span class="proj-req-badge" style="background:rgba(240,90,40,.12);color:var(--brand)">기여도: 100% 기획·운영</span>
+          <span class="proj-req-badge" style="background:rgba(100,116,139,.1);color:var(--gray)">역할: 조직문화 기획</span>
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag-chip">사내 카페 운영</span>
+          <span class="proj-tag-chip">분위기 전환</span>
+          <span class="proj-tag-chip">구성원 경험</span>
+          <span class="proj-tag-chip">문화 이벤트</span>
+        </div>
+      </div>
+      <div class="proj-detail">
+        <div class="detail-two-col">
+          <div>
+            <div class="detail-section-title">배경 & 수행 업무</div>
+            <div class="detail-task">회사 리빌딩 과정에서 경직된 분위기 해소 필요성 자체 판단 → HR 주도 조직문화 기획 시작</div>
+            <div class="detail-task">사내 카페 공간 기획·운영 — 구성원이 부담 없이 교류할 수 있는 일상적 환경 조성</div>
+            <div class="detail-task">소규모 문화 이벤트 기획·진행 — 팀 간 경계를 낮추고 자연스러운 연결을 만드는 자리 설계</div>
+          </div>
+          <div>
+            <div class="detail-section-title">기획 의도</div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">Why</span>
+              <span class="detail-outcome-label">제도 개편과 함께 구성원이 느끼는 일상의 온도도 HR이 챙겨야 한다는 관점에서 출발</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">배움</span>
+              <span class="detail-outcome-label">조직문화는 큰 이벤트보다 작고 따뜻한 일상의 경험들이 쌓여 만들어진다는 것</span>
+            </div>
+            <div class="detail-outcome">
+              <span class="detail-outcome-num">진행중</span>
+              <span class="detail-outcome-label">인사제도 개편과 병행하여 지속 운영 중</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.proj-grid (2nd) -->
+
+</section>
+
+<!-- ═══ CHAT ═══ -->
+<section id="sec-chat" class="section">
+  <p class="sec-title">AI와 대화하기</p>
+  <div class="chat-wrap" style="max-width:640px;margin:0 auto">
+    <div class="chat-header">
+      <div class="chat-dot"></div>
+      <span class="chat-title">유영선 포트폴리오 AI</span>
+      <span class="chat-sub">Claude 기반 · 실시간 응답</span>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg-row assistant">
+        <div class="msg-bubble">안녕하세요! 저는 유영선의 HR 경험과 역량에 대해 답변해 드리는 AI입니다. 채용 경험, 지원 동기, 직무 역량 등 궁금한 점을 자유롭게 질문해 보세요 &#128522;</div>
+      </div>
+    </div>
+    <div class="chat-suggested">
+      <button class="sugg-btn" onclick="sendSuggestion(this)">채용 운영 경험을 말씀해 주세요</button>
+      <button class="sugg-btn" onclick="sendSuggestion(this)">대학내일 지원 동기가 궁금해요</button>
+      <button class="sugg-btn" onclick="sendSuggestion(this)">AI 활용 경험이 뭔가요?</button>
+      <button class="sugg-btn" onclick="sendSuggestion(this)">에이전시 HR을 어떻게 접근하실 건가요?</button>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="유영선에 대해 궁금한 점을 질문해 보세요..." onkeydown="if(event.key==='Enter'&&!event.isComposing)sendChat()">
+      <button id="send-btn" onclick="sendChat()">전송</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="footer">
+  <div>
+    <div class="footer-name">유영선</div>
+    <div class="footer-info">dbdudtjs12@naver.com · 010-5345-8356 · HR Portfolio 2026</div>
+  </div>
+  <div class="footer-right">
+    <div class="footer-target">㈜대학내일 지원</div>
+    <div class="footer-role">STAFF(HRM) 인사팀 경력직</div>
+  </div>
+</footer>
+
+<script>
+// ──────────────────────────────────────────
+// 섹션 전환
+// ──────────────────────────────────────────
+function showSection(name) {
+  // 모든 섹션 숨기기
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+
+  // 해당 섹션 보이기
+  const sec = document.getElementById('sec-' + name);
+  if (sec) sec.classList.add('active');
+
+  // 탭 활성화
+  const tabs = document.querySelectorAll('.nav-tab');
+  const map = { overview: 0, projects: 1, chat: 2 };
+  if (tabs[map[name]]) tabs[map[name]].classList.add('active');
+
+  // 스킬바 애니메이션은 overview로 이동 시
+  if (name === 'overview') animateSkillBars();
+}
+
+// ──────────────────────────────────────────
+// 스킬바 애니메이션
+// ──────────────────────────────────────────
+function animateSkillBars() {
+  document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+    const target = bar.getAttribute('data-width');
+    bar.style.width = '0';
+    requestAnimationFrame(() => {
+      setTimeout(() => { bar.style.width = target + '%'; }, 80);
+    });
+  });
+}
+
+// 페이지 로드 시 초기 실행
+window.addEventListener('load', () => {
+  animateSkillBars();
+});
+
+// ──────────────────────────────────────────
+// 프로젝트 카드 토글
+// ──────────────────────────────────────────
+function toggleProject(card) {
+  const isOpen = card.classList.contains('open');
+  // 같은 그리드 내 다른 카드 닫기
+  const grid = card.closest('.proj-grid');
+  if (grid) {
+    grid.querySelectorAll('.proj-card.open').forEach(c => {
+      if (c !== card) c.classList.remove('open');
+    });
+  }
+  card.classList.toggle('open', !isOpen);
+}
+
+// ──────────────────────────────────────────
+// AI 채팅 (Anthropic API)
+// ──────────────────────────────────────────
+const SYSTEM_PROMPT = `당신은 유영선의 HR 포트폴리오 AI 어시스턴트입니다. 채용 담당자나 면접관이 유영선에 대해 질문할 때 유영선 본인의 입장에서 1인칭("저는...")으로 답변합니다.
+
+[유영선 프로필]
+이름: 유영선 | 지원: ㈜대학내일 STAFF(HRM) 인사팀 경력직 | HR 경력: 4년+
+
+[경력]
+- ㈜큐엠아이티(QMIT): 2026.01~현재 | 인사총무 단독 | AI 스타트업(Series A 77억), 전사 AX 프로젝트 주도, 인사제도 개편, 채용 운영
+- ㈜에이비인터내셔날: 2025.07~12 (5개월) | 인사총무 단독 | 주방용품 B2B/B2C, Payroll 체계 구축, 모성보호 표준화, 평가보상 정립
+- ㈜더플릭: 2022.05~2024.07 (2년 3개월) | 인사총무 단독 | 브랜딩 에이전시, 채용 전략 전면 구축, HR 시스템 도입, 조직문화 설계
+- ㈜한달어스: 2021.09~2022.02 (6개월) | 인사총무 계약직 | 자기계발 플랫폼, 아웃바운드 채용, 정부지원사업 활용
+
+[핵심 성과]
+- 채용 지원율 30% 증가 / 면접 불참율 40%→10% 개선
+- 사내 행사 참여율 95%, 만족도 4.8/5
+- 복지 만족도 4.7/5, 활용률 85%+
+- Payroll 오류율 0% / 모성보호 근태 오류율 0%
+- 정부지원금 수령률 100%
+- 채용 보조금 1천만원+ 확보
+
+[주요 프로젝트]
+1. 채용 전략 전면 구축(더플릭): JD/면접질문/평가표 전면 구조화, 커뮤니케이션 매뉴얼로 이탈 방지
+2. Payroll & 모성보호 표준화(에이비인터내셔날): 다양한 고용형태 급여 기준화, 정부지원금 관리
+3. 아웃바운드 채용(한달어스): SNS/링크드인 채용, 정부지원사업 1천만원+
+4. AI 활용 체계 도입(큐엠아이티): 팀별 Claude 가이드/프롬프트 설계, 전사 AI 교육
+5. HR 운영 시스템 구축(더플릭): Notion/Slack/Google Sheets 기반 시스템
+6. 조직문화 & 온보딩 설계(더플릭): 핵심가치 도출, 복리후생 재설계
+7. 리빌딩기 조직문화(큐엠아이티): 사내 카페 기획/운영, 구성원 경험 이벤트
+
+[역량] 채용운영(95%), HR Lifecycle(92%), Payroll/노무(88%), 평가보상(85%), 조직문화(90%), AI도구(84%)
+[툴] Claude AI, Notion, Slack, Google Workspace, 더존 ERP, 그리팅, 나인하이어, Figma
+
+[HR 철학]
+- 뾰족한 HR: "누구를 위한 것인가" 먼저 묻고 실제로 쓰이는 제도를 만듦
+- 따뜻한 HR: 구성원 한 명 한 명의 일상을 진심으로 챙김
+- 데이터 기반 HR: 수치로 진단하고 측정
+
+[대학내일 지원 동기]
+20대의 커리어와 삶을 더 알차게 만들고 싶다는 바람, 세대를 읽어 시대를 리드하는 대학내일 미션과 맞닿음. 에이전시 조직의 다양한 직무와 빠른 변화를 HR 관점에서 잘 이해하고 기여할 수 있음.
+
+[답변 규칙]
+- 유영선 본인 입장에서 1인칭으로 자연스럽게 답변
+- 구체적인 수치와 사례를 활용해 신뢰감 있게
+- 한국어로, 간결하게 (200~400자 내외)
+- 포트폴리오와 무관한 질문은 "이 AI는 유영선의 HR 역량에 대해 답변하도록 설계되어 있습니다"라고 안내`;
+
+let chatHistory = [];
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  addMessage('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  const sendBtn = document.getElementById('send-btn');
+  sendBtn.disabled = true;
+  input.disabled = true;
+
+  const typingId = showTyping();
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistory })
+    });
+
+    const data = await res.json();
+    removeTyping(typingId);
+
+    if (!res.ok || data.error) {
+      addMessage('assistant', '오류: ' + (data.error || '잠시 후 다시 시도해 주세요.'));
+      chatHistory.pop();
+    } else {
+      addMessage('assistant', data.reply);
+      chatHistory.push({ role: 'assistant', content: data.reply });
+    }
+  } catch (e) {
+    removeTyping(typingId);
+    addMessage('assistant', '연결에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+    chatHistory.pop();
+  } finally {
+    sendBtn.disabled = false;
+    input.disabled = false;
+    input.focus();
+  }
+}
+
+function sendSuggestion(btn) {
+  const input = document.getElementById('chat-input');
+  input.value = btn.textContent;
+  sendChat();
+}
+
+</script>
+
+</body>
+</html>
