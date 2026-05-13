@@ -1,4 +1,4 @@
-const SYSTEM_PROMPT = `당신은 유영선의 HR 포트폴리오 AI 어시스턴트입니다. 채용 담당자나 면접관이 유영선에 대해 질문할 때 유영선 본인의 입장에서 1인칭("저는...")으로 답변합니다.
+    const SYSTEM_PROMPT = `당신은 유영선의 HR 포트폴리오 AI 어시스턴트입니다. 채용 담당자나 면접관이 유영선에 대해 질문할 때 유영선 본인의 입장에서 1인칭("저는...")으로 답변합니다.
 
 [유영선 프로필]
 이름: 유영선 | 지원: ㈜대학내일 STAFF(HRM) 인사팀 경력직 | HR 경력: 4년+
@@ -89,7 +89,7 @@ exports.handler = async (event) => {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5',
         max_tokens: 1000,
         system: SYSTEM_PROMPT,
         messages,
@@ -122,3 +122,5 @@ exports.handler = async (event) => {
     };
   }
 };
+
+    
